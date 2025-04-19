@@ -6,7 +6,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 const client = generateClient<Schema>();
 
 export default function App() {
-  const { signOut } = useAuthenticator();
+  const { user, signOut } = useAuthenticator();
 
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
@@ -33,8 +33,7 @@ export default function App() {
 
   return (
     <main>
-      <button onClick={signOut}>Sign out</button>
-      <h1>My todos</h1>
+      <h1>{user?.signInDetails?.loginId}'s To do list</h1>      
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map(todo => <li
